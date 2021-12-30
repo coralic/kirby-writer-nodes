@@ -3,42 +3,42 @@ export default class Extension {
     this.options = {
       ...this.defaults,
       ...options,
-    };
+    }
   }
 
   init() {
-    return null;
+    return null
   }
 
   bindEditor(editor = null) {
-    this.editor = editor;
+    this.editor = editor
   }
 
   get name() {
-    return null;
+    return null
   }
 
   get type() {
-    return "extension";
+    return 'extension'
   }
 
   get defaults() {
-    return {};
+    return {}
   }
 
   plugins() {
-    return [];
+    return []
   }
 
   inputRules() {
-    return [];
+    return []
   }
 
   pasteRules() {
-    return [];
+    return []
   }
 
   keys() {
-    return {};
+    return {}
   }
 }

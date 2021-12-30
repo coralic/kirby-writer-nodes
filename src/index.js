@@ -1,15 +1,15 @@
-import writerMarks from "./plugins/writerMarks";
-import Footnote from "./Marks/Footnote";
+import writerNodes from './plugins/writerNodes'
+import Quote from './Nodes/Quote'
 
-window.panel.plugin("johannschopplich/kirby-writer-marks", {
-  use: [writerMarks],
+window.panel.plugin('coralic/kirby-writer-nodes', {
+  use: [writerNodes],
   thirdParty: {
-    marks: {
-      // Import custom marks from other plugins
-      ...(window.panel.plugins.thirdParty.marks || {}),
+    nodes: {
+      // Import custom nodes from other plugins
+      ...(window.panel.plugins.thirdParty.nodes || {}),
 
       // Provide class, not an instance of it
-      footnote: Footnote,
+      quote: Quote,
     },
   },
-});
+})

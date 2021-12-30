@@ -1,1 +1,130 @@
-var f=Object.defineProperty,w=Object.defineProperties;var M=Object.getOwnPropertyDescriptors;var l=Object.getOwnPropertySymbols;var y=Object.prototype.hasOwnProperty,b=Object.prototype.propertyIsEnumerable;var c=(n,t,r)=>t in n?f(n,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):n[t]=r,i=(n,t)=>{for(var r in t||(t={}))y.call(t,r)&&c(n,r,t[r]);if(l)for(var r of l(t))b.call(t,r)&&c(n,r,t[r]);return n},d=(n,t)=>w(n,M(t));(function(){"use strict";function n(s){const e=window.panel.plugins.thirdParty;if(e.__marksInitialized)return;const a=e.marks;if(!a)return;const u=s.component("k-writer");s.component("k-writer",{extends:u,methods:{createMarks(){const h=u.options.methods.createMarks.call(this).filter(({name:o})=>!Object.keys(a).includes(o)),k=Object.entries(a).reduce((o,[g,p])=>(o[g]=new p,o),{});return[...h,...this.filterExtensions(k,this.marks)]}}}),e.__marksInitialized=!0}class t{constructor(e={}){this.options=i(i({},this.defaults),e)}init(){return null}bindEditor(e=null){this.editor=e}get name(){return null}get type(){return"extension"}get defaults(){return{}}plugins(){return[]}inputRules(){return[]}pasteRules(){return[]}keys(){return{}}}class r extends t{constructor(e={}){super(e)}command(){return()=>{}}remove(){this.editor.removeMark(this.name)}get schema(){return null}get type(){return"mark"}toggle(){return this.editor.toggleMark(this.name)}update(e){this.editor.updateMark(this.name,e)}}class m extends r{get button(){return{icon:"quote",label:"Footnote"}}commands(){return()=>this.toggle()}get name(){return"footnote"}get schema(){return{parseDOM:[{tag:"article-footnote"}],toDOM:e=>["article-footnote",i({},e.attrs),0]}}}window.panel.plugin("johannschopplich/kirby-writer-marks",{use:[n],thirdParty:{marks:d(i({},window.panel.plugins.thirdParty.marks||{}),{footnote:m})}})})();
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+(function() {
+  "use strict";
+  function writerNodes(Vue) {
+    const thirdParty = window.panel.plugins.thirdParty;
+    if (thirdParty.__nodesInitialized)
+      return;
+    const customNodes = thirdParty.nodes;
+    if (!customNodes)
+      return;
+    const original = Vue.component("k-writer");
+    Vue.component("k-writer", {
+      extends: original,
+      methods: {
+        createNodes() {
+          const originalNodes = original.options.methods.createNodes.call(this).filter(({ name }) => !Object.keys(customNodes).includes(name));
+          const nodes = Object.entries(customNodes).reduce((acc, [key, Constructor]) => {
+            acc[key] = new Constructor();
+            return acc;
+          }, {});
+          return [...originalNodes, ...this.filterExtensions(nodes, this.nodes)];
+        }
+      }
+    });
+    thirdParty.__nodesInitialized = true;
+  }
+  class Extension {
+    constructor(options = {}) {
+      this.options = __spreadValues(__spreadValues({}, this.defaults), options);
+    }
+    init() {
+      return null;
+    }
+    bindEditor(editor = null) {
+      this.editor = editor;
+    }
+    get name() {
+      return null;
+    }
+    get type() {
+      return "extension";
+    }
+    get defaults() {
+      return {};
+    }
+    plugins() {
+      return [];
+    }
+    inputRules() {
+      return [];
+    }
+    pasteRules() {
+      return [];
+    }
+    keys() {
+      return {};
+    }
+  }
+  class Node extends Extension {
+    constructor(options = {}) {
+      super(options);
+    }
+    get type() {
+      return "node";
+    }
+    get schema() {
+      return null;
+    }
+    commands() {
+      return {};
+    }
+  }
+  class Quote extends Node {
+    get button() {
+      return {
+        id: this.name,
+        icon: "quote",
+        label: window.panel.$t("field.blocks.quote.name"),
+        name: this.name
+      };
+    }
+    commands({ utils, type }) {
+      return {
+        quote: () => utils.setBlockType(type)
+      };
+    }
+    get name() {
+      return "quote";
+    }
+    get schema() {
+      return {
+        content: "inline*",
+        group: "block",
+        draggable: false,
+        parseDOM: [
+          {
+            tag: "blockquote"
+          }
+        ],
+        toDOM: () => ["blockquote", 0]
+      };
+    }
+  }
+  window.panel.plugin("coralic/kirby-writer-nodes", {
+    use: [writerNodes],
+    thirdParty: {
+      nodes: __spreadProps(__spreadValues({}, window.panel.plugins.thirdParty.nodes || {}), {
+        quote: Quote
+      })
+    }
+  });
+})();

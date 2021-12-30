@@ -1,10 +1,10 @@
-![Footnote mark for the Kirby writer field](./writer-field-footnote.png)
+![Quote node for the Kirby writer field](./writer-custom-quote-node.png)
 
-# Custom Writer Field Marks
+# Custom Writer Field Nodes
 
-This repository serves as a plugin boilerplate for extending the [writer field](https://getkirby.com/docs/reference/panel/fields/writer) with **custom marks** until Kirby natively supports them.
+This repository serves as a plugin boilerplate for extending the [writer field](https://getkirby.com/docs/reference/panel/fields/writer) with **custom nodes** until Kirby natively supports them.
 
-One of the beauties of open source is ideas are thrown out into the world to be picked up and improved upon in exchange. An older version of this plugin relied on a patcher for the panel. [Roman Steiner](https://github.com/rasteiner) found a way to free it from the patcher, culminating in his clever [Oh Hi Mark plugin](https://github.com/rasteiner/oh-hi-mark)! Based on his approach I reworked my plugin boilerplate, without making use of the prototype hack.
+This boilerplate is forked from Johann Schopplichs [Custom Writer field marks boilerplate](https://github.com/johannschopplich/kirby-writer-marks) and changes it to work with nodes.
 
 ## Installation
 
@@ -12,27 +12,29 @@ One of the beauties of open source is ideas are thrown out into the world to be 
 
 ### Download
 
-Download and copy this repository to `/site/plugins/kirby-writer-marks`.
+Download and copy this repository to `/site/plugins/kirby-writer-nodes`.
 
 ### Git submodule
 
 ```
-git submodule add https://github.com/johannschopplich/kirby-writer-marks.git site/plugins/kirby-writer-marks
+git submodule add https://github.com/coralic/kirby-writer-nodes.git site/plugins/kirby-writer-nodes
 ```
 
 ## Usage
 
-This plugin adds a custom **footnote mark**, which will create a `<article-footnote>` custom element. Styling included.
+This plugin adds a custom **quote mark**, which will create a `<blockquote>`-based element. Styling included.
 
-You can create custom plugins yourself. To get inspiration, head over to Kirby's official [writer marks](https://github.com/getkirby/kirby/tree/master/panel/src/components/Writer/Marks).
+You can create custom plugins yourself. To get inspiration, head over to Kirby's official [writer nodes](https://github.com/getkirby/kirby/tree/master/panel/src/components/Forms/Writer/Nodes).
 
-Custom marks are located in [`src/Marks`](./src/Marks) and initiate inside [`src/index.js`](./src/index.js).
+Custom nodes are located in [`src/Nodes`](./src/Nodes) and initiate inside [`src/index.js`](./src/index.js).
+
+In order for custom nodes to show up, you need to add them manually to your plugin blueprints or extend the Writer Vue component to include them per default.
 
 ### Development
 
 > ℹ️ [kirbyup](https://github.com/johannschopplich/kirbyup) is used for building the Kirby Panel plugin.
 
-Spin up the development server to watch your main script. You will have to refresh the Panel manually to see your new custom marks in the writer field.
+Spin up the development server to watch your main script. You will have to refresh the Panel manually to see your new custom nodes in the writer field.
 
 ```bash
 npm run dev
@@ -48,8 +50,9 @@ npm run build
 
 ## Credits
 
-- [Roman Steiner](https://github.com/rasteiner) for his inspirational [Oh Hi Mark plugin](https://github.com/rasteiner/oh-hi-mark)
+- [Johann Schopplich](https://github.com/johannschopplich) for the Custom Writer field marks boilerplate this repo is based on
+- [Roman Steiner](https://github.com/rasteiner) for his [Oh Hi Mark plugin](https://github.com/rasteiner/oh-hi-mark)
 
 ## License
 
-[MIT](./LICENSE) License © 2021 [Johann Schopplich](https://github.com/johannschopplich)
+[MIT License](./LICENSE) © 2021 [Tobias Möritz](https://github.com/tobimori)
