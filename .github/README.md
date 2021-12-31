@@ -24,7 +24,7 @@ git submodule add https://github.com/coralic/kirby-writer-nodes.git site/plugins
 
 This plugin adds a custom **quote mark**, which will create a `<blockquote>`-based element. Styling included.
 
-You can create custom plugins yourself. To get inspiration, head over to Kirby's official [writer nodes](https://github.com/getkirby/kirby/tree/master/panel/src/components/Forms/Writer/Nodes).
+You can create custom plugins yourself. To get inspiration, head over to Kirby's official [writer nodes](https://github.com/getkirby/kirby/tree/master/panel/src/components/Forms/Writer/Nodes). The Writer field is based on [ProseMirror](https://prosemirror.net/), so check out [their documentation to learn more about nodes](https://prosemirror.net/docs/ref/).
 
 Custom nodes are located in [`src/Nodes`](./src/Nodes) and initiate inside [`src/index.js`](./src/index.js).
 
