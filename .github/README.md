@@ -1,3 +1,5 @@
+This functionality is now included in Kirby 4. Please upgrade to the first-party integration if you can.
+
 ![Quote node for the Kirby writer field](./writer-custom-quote-node.png)
 
 # Custom Writer Field Nodes
